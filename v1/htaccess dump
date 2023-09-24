@@ -1,0 +1,23 @@
+RewriteEngine On
+RewriteBase /smkti/restAPI/v1/
+
+# Route semua permintaan ke index.php
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^ index.php [QSA,L]
+
+# Atur aturan untuk metode HTTP GET
+RewriteRule ^books$ index.php?action=get_books [QSA,L]
+
+# Atur aturan untuk metode HTTP POST
+RewriteRule ^add-book$ index.php?action=add_book [QSA,L]
+
+# Atur aturan untuk metode HTTP PUT ke buku-put.php
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_METHOD} PUT
+RewriteRule ^update-book$ index.php?action=update_book [QSA,L]
+
+# Atur aturan untuk metode HTTP DELETE
+RewriteCond %{REQUEST_METHOD} DELETE
+RewriteRule ^delete-book$ index.php?action=delete_book [QSA,L]
